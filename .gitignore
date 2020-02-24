@@ -1,0 +1,8 @@
+account.json*
+terraform*
+us-central1/account.json*
+eu-west3/account.json*
+us-central1/tfstate*
+us-central1/.terraform
+eu-west3/tfstate*
+eu-west3/.terraform
