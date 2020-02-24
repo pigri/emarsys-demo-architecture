@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: emarsys-due-date-calculator-service
+spec:
+  selector:
+    matchLabels:
+      app: emarsys-due-date-calculator-service
+  template:
+    metadata:
+      labels:
+        app: emarsys-due-date-calculator-service
+    spec:
+      containers:
+      - name: emarsys-due-date-calculator-service
+        image: pigri/emarsys-due-date-calculator-service:v0.0.3
+        resources:
+          requests:
+            cpu: "10m"
+            memory: "25Mi"
+          limits:
+            cpu: "500m"
+            memory: "25Mi"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+              path: /status/healthz
+              port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+              path: /status/healthz
+              port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
